@@ -135,7 +135,7 @@
                     <ImageView
                         android:layout_weight="5"
                         android:layout_gravity="center"
-                        android:src="@drawable/facourie"
+                        android:src="@drawable/star"
                         android:id="@+id/img_favoritecart"
                         android:layout_width="15dp"
                         android:layout_height="15dp" />
@@ -149,7 +149,7 @@
                         android:textStyle="bold"
                         android:textSize="16dp"
                         android:text="10"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="#000"
                         android:id="@+id/tv_medicinepricecart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -157,7 +157,7 @@
                             android:textStyle="bold"
                             android:textSize="16dp"
                             android:text="$"
-                            android:textColor="@color/colorAccent"
+                            android:textColor="@android:color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>

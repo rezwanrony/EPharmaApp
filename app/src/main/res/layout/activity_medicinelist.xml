@@ -11,6 +11,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_backgroundmedicinelist"
@@ -172,6 +175,40 @@
 
     </LinearLayout>
 
+
+
     </RelativeLayout>
 
+    <LinearLayout
+        android:weightSum="15"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:layout_weight="5"
+            android:id="@+id/img_homesearch"
+            android:layout_gravity="center"
+            android:src="@drawable/homepage"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+
+        <ImageView
+            android:layout_weight="5"
+            android:id="@+id/img_cartsearch"
+            android:layout_gravity="center"
+            android:src="@drawable/cart"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+
+        <ImageView
+            android:layout_weight="5"
+            android:id="@+id/img_profilesearch"
+            android:layout_gravity="center"
+            android:src="@drawable/profile"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

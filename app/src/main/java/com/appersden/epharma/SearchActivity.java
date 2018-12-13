@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class SearchActivity extends AppCompatActivity{
 
-    SearchView et_search;
+    /*SearchView et_search;
     ImageView img_search,img_home,img_cart,img_profile;
     LinearLayout lay_search;
     @Override
@@ -24,22 +24,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_search);
         et_search=(SearchView) findViewById(R.id.et_searchmedicine);
         //img_search=(ImageView)findViewById(R.id.img_search);
-        img_home=(ImageView)findViewById(R.id.img_homesearch);
-        img_cart=(ImageView)findViewById(R.id.img_cartsearch);
-        img_profile=(ImageView)findViewById(R.id.img_profilesearch);
-        lay_search=(LinearLayout)findViewById(R.id.llsearch);
 
-
-        changeiconcolour(SearchActivity.this,R.drawable.homepage,img_home);
-        changeiconcolourtogrey(SearchActivity.this,R.drawable.cart,img_cart);
-        changeiconcolourtogrey(SearchActivity.this,R.drawable.profile,img_profile);
-
-        img_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SearchActivity.this,CartActivity.class));
-            }
-        });
 
         et_search.setOnQueryTextListener(this);
     }
@@ -65,5 +50,5 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     public boolean onQueryTextChange(String newText) {
         //dialog.getWindow().setGravity(Gravity.BOTTOM);
         return false;
-    }
+    }*/
 }

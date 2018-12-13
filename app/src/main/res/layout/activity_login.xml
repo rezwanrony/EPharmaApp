@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardviewlogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            app:cardElevation="10dp"
+            android:paddingTop="10dp"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <RelativeLayout
+                        android:layout_gravity="start"
+                        android:layout_marginRight="7dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp">
+                        <Button
+                            android:id="@+id/toolbar_backlogin"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="start"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/back"/>
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:gravity="end"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="7dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp">
+
+                        <Button
+                            android:id="@+id/toolbar_notificationlogin"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/notication"/>
+
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.Toolbar>
+
+                <ImageView
+                    android:id="@+id/img_logosignup"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/epharmalogo"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginBottom="15dp"
+                    android:layout_gravity="center"
+                    android:textSize="26sp"
+                    android:text="Login"
+                    android:textColor="@color/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="Username"
+                        android:textColor="@color/text"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="9"
+                        android:padding="2dp"
+                        android:background="@drawable/border_squer"
+                        android:orientation="vertical"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp">
+
+                        <EditText
+                            android:layout_marginLeft="5dp"
+                            android:background="@null"
+                            android:inputType="text"
+                            android:id="@+id/et_usernamelogin"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="25dp"
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:text="Password"
+                        android:textColor="@color/text"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="9"
+                        android:padding="2dp"
+                        android:background="@drawable/border_squer"
+                        android:orientation="vertical"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp">
+
+                        <EditText
+                            android:background="@null"
+                            android:inputType="textPassword"
+                            android:id="@+id/et_passwordlogin"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <Button
+                    android:id="@+id/btn_signup"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:text="Login"
+                    android:background="@drawable/searchtext_shape"
+                    android:layout_marginTop="40dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

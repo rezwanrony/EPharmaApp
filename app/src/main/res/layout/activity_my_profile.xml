@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardviewlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0.0px"
+        app:cardElevation="10dp"
+        android:paddingTop="10dp"
+        app:cardPreventCornerOverlap="false">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <RelativeLayout
+                    android:layout_gravity="start"
+                    android:layout_marginRight="7dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp">
+                    <Button
+                        android:id="@+id/toolbar_backmyprofile"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="start"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/back"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:gravity="end"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="7dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp">
+
+                    <Button
+                        android:id="@+id/toolbar_notificationmyprofile"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/notication"/>
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:text="My Profile"
+                android:textColor="@color/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <RelativeLayout
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+
+            <ImageView
+                android:id="@+id/img_profilepic"
+                android:src="@drawable/propicmale"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/black"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp">
+                <ImageView
+                    android:id="@+id/img_propicedit"
+                    android:src="@drawable/edit"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                android:text="My Details"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="@color/text"
+                android:layout_width="80dp"
+                android:layout_height="1dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:text="Username"
+                android:textColor="@color/text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_weight="4.5"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="60dp"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:enabled="false"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:id="@+id/et_usernamemyprofile"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:background="@color/text"
+                android:id="@+id/btn_okusernamemyprofile"
+                android:layout_weight="2"
+                android:textColor="@android:color/white"
+                android:text="OK"
+                android:layout_marginLeft="15dp"
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/edit"
+                android:id="@+id/img_editusernamemyprofile"
+                android:layout_weight="1.5"
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:text="Phone"
+                android:textColor="@color/text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_weight="4.5"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="60dp"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:enabled="false"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:id="@+id/et_phonemyprofile"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:textColor="@android:color/white"
+                android:background="@color/text"
+                android:id="@+id/btn_okphonemyprofile"
+                android:layout_weight="2"
+                android:text="OK"
+                android:layout_marginLeft="15dp"
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/edit"
+                android:id="@+id/img_editphonemyprofile"
+                android:layout_weight="1.5"
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1.8"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:text="Gender"
+                android:textColor="@color/text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_weight="4.5"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="60dp"
+                android:layout_height="40dp">
+
+                <Spinner
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/spinnergendermyprofile"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:textColor="@android:color/white"
+                android:background="@color/text"
+                android:id="@+id/btn_okgendermyprofile"
+                android:layout_weight="2"
+                android:text="OK"
+                android:layout_marginLeft="15dp"
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/edit"
+                android:id="@+id/img_editgendermyprofile"
+                android:layout_weight="1.5"
+                android:layout_width="20dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                android:text="My Address(es)"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="@color/text"
+                android:layout_width="120dp"
+                android:layout_height="1dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_weight="6"
+                android:textColor="@color/text"
+                android:text="Address 01 :"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+                <Button
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text"
+                    android:background="@null"
+                    android:id="@+id/btn_addanotheraddressmyprofile"
+                    android:layout_weight="4"
+                    android:text="Add another address(+)"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="8"
+                android:layout_marginTop="3dp"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp">
+
+                <EditText
+                    android:background="@null"
+                    android:inputType="text"
+                    android:id="@+id/et_addressone"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+                <Button
+                    android:enabled="false"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="@color/text"
+                    android:id="@+id/btn_addressonemyprofile"
+                    android:text="OK"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lladdresstwo"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_weight="6"
+                    android:textColor="@color/text"
+                    android:text="Address 02 :"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_weight="8"
+                    android:layout_marginTop="3dp"
+                    android:padding="2dp"
+                    android:background="@drawable/border_squer"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp">
+
+                    <EditText
+                        android:background="@null"
+                        android:inputType="text"
+                        android:id="@+id/et_addresstwomyprofile"
+                        android:textSize="16sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <Button
+                    android:enabled="false"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="@color/text"
+                    android:id="@+id/btn_addresstwomyprofile"
+                    android:text="OK"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                android:text="Change Password"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="@color/text"
+                android:layout_width="100dp"
+                android:layout_height="1dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:text="Old Password"
+                android:textColor="@color/text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_weight="9"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="60dp"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    android:id="@+id/et_oldpasswordprofile"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:text="New Password"
+                android:textColor="@color/text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_weight="9"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="60dp"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    android:id="@+id/et_newpassprofile"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_weight="9"
+                android:padding="2dp"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="60dp"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:background="@null"
+                    android:inputType="textPassword"
+                    android:id="@+id/et_confpassprofile"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="15"
+            android:layout_alignParentBottom="true"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_weight="5"
+                android:id="@+id/img_homesearchprofile"
+                android:layout_gravity="center"
+                android:src="@drawable/homepage"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <ImageView
+                android:layout_weight="5"
+                android:id="@+id/img_cartsearchprofile"
+                android:layout_gravity="center"
+                android:src="@drawable/cart"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <ImageView
+                android:layout_weight="5"
+                android:id="@+id/img_profilesearchprofile"
+                android:layout_gravity="center"
+                android:src="@drawable/profile"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

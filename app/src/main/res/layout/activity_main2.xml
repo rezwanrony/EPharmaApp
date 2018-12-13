@@ -61,7 +61,7 @@
 
 
                 <LinearLayout
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical"
@@ -93,39 +93,7 @@
 
 
                     </FrameLayout>
-                    <LinearLayout
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:textSize="10sp"
-                            android:layout_marginLeft="15dp"
-                            android:text="Find what you want"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:textColor="#fff"
-                            android:gravity="center"
-                            android:background="@drawable/searchanothertext_shape"
-                            android:textSize="10sp"
-                            android:layout_marginLeft="15dp"
-                            android:text="Tablet"
-                            android:layout_width="50dp"
-                            android:layout_height="20dp" />
-                        <TextView
-                            android:textColor="#fff"
-                            android:gravity="center"
-                            android:background="@drawable/searchtext_shape"
-                            android:textSize="10sp"
-                            android:layout_marginLeft="15dp"
-                            android:text="Capsule"
-                            android:layout_width="50dp"
-                            android:layout_height="20dp" />
-
-                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -144,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/text"
                 android:gravity="center"
                 android:textSize="25sp"
                 android:text="20.00"
@@ -183,7 +151,7 @@
                 <TextView
                     android:textSize="20sp"
                     android:text="Napa Extra"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/text"
                     android:textStyle="bold"
                     android:id="@+id/tv_medicinename"
                     android:layout_width="180dp"
@@ -203,7 +171,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/facourie"
+                android:src="@drawable/star"
                 android:id="@+id/img_favorite"
                 android:layout_width="25dp"
                 android:layout_height="25dp" />
@@ -222,7 +190,7 @@
             <TextView
                 android:textSize="16dp"
                 android:text="Rate/10 Tablet"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -238,7 +206,7 @@
                     android:gravity="end"
                     android:textSize="16dp"
                     android:text="10 $"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -359,7 +327,7 @@
             android:textColor="#fff"
             android:textAllCaps="false"
             android:text="Add to cart"
-            android:background="@drawable/searchanothertext_shape"
+            android:background="@drawable/searchtext_shape"
             android:layout_marginTop="60dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
