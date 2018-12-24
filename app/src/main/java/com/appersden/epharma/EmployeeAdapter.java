@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class EmployeeAdapter extends BaseAdapter implements Filterable {
 
     public class EmployeeHolder
     {
+        ImageView capsule;
         TextView name;
         TextView age;
     }
@@ -93,6 +95,7 @@ public class EmployeeAdapter extends BaseAdapter implements Filterable {
         {
             convertView= LayoutInflater.from(context).inflate(R.layout.custom_medicine_list, parent, false);
             holder=new EmployeeHolder();
+            holder.capsule=(ImageView)convertView.findViewById(R.id.img_capsuleicon);
             holder.name=(TextView) convertView.findViewById(R.id.tv_medicinename);
             holder.age=(TextView) convertView.findViewById(R.id.tv_medicinecompany);
             convertView.setTag(holder);
@@ -101,7 +104,7 @@ public class EmployeeAdapter extends BaseAdapter implements Filterable {
         {
             holder=(EmployeeHolder) convertView.getTag();
         }
-
+        holder.capsule.setImageResource(employeeArrayList.get(position).getImage());
         holder.name.setText(employeeArrayList.get(position).getName());
         holder.age.setText(employeeArrayList.get(position).getCompany());
 

@@ -3,6 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="text">#4DCBEC</color>
+    <color name="text">#56CDDF</color>
     <color name="textcart">#91E5DE</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="grey">#C0C0C0</color>
+    <color name="fragmentcolor">#fff</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="selectedtabcolor">#FFC300</color>
+    <color name="disselectedtabcolor">#f4d03f</color>
 </resources>

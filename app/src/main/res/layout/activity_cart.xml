@@ -26,12 +26,15 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/epharmalogo"
-                    android:layout_width="250dp"
-                    android:layout_height="60dp" />
+                <TextView
+                    style="@style/Cursive"
+                    android:textColor="@color/textcart"
+                    android:textSize="45sp"
+                    android:text="EPharma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="72dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_gravity="center_horizontal" />
 
                 <LinearLayout
                     android:layout_marginTop="25dp"

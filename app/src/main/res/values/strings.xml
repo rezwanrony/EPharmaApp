@@ -5,4 +5,17 @@
         <item>Female</item>
         <item>Others</item>
     </string-array>
+    <string-array name="genderfemale_array">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="pics_array">
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+    </string-array>
+    <string-array name="complete_array">
+        <item>Complete</item>
+    </string-array>
 </resources>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="15"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="5"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/et_addressone"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="@null"
+                    android:enabled="false"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:weightSum="15"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/tick"
+                    android:id="@+id/img_okaddressonemyprofile"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <ImageView
+                    android:src="@drawable/editiconfield"
+                    android:id="@+id/img_editaddressonemyprofile"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lladdresstwo"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="15"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="5"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:enabled="false"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:id="@+id/et_addresstwomyprofile"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:weightSum="15"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/tick"
+                    android:id="@+id/img_okaddresstwomyprofile"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <ImageView
+                    android:src="@drawable/editiconfield"
+                    android:id="@+id/img_editaddresstwomyprofile"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lladdressthree"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="15"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="5"
+                android:background="@drawable/border_squer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:enabled="false"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:id="@+id/et_addressthreemyprofile"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:weightSum="15"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/tick"
+                    android:id="@+id/img_okadddressthreemyprofile"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+                <ImageView
+                    android:src="@drawable/editiconfield"
+                    android:id="@+id/img_editadressthreemyprofile"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+    </ScrollView>
+    <ImageView
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/addicon"
+        android:id="@+id/btn_addanotheraddressmyprofile"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+</RelativeLayout>

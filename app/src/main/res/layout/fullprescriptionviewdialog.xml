@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:background="@drawable/border_squer"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:src="@drawable/close"
+            android:id="@+id/img_closeprescription"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <ImageView
+            android:id="@+id/img_previewprescription"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
+    </RelativeLayout>
+</LinearLayout>

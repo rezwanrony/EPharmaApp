@@ -1,96 +1,194 @@
 package com.appersden.epharma;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Parcelable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Filter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class MedicineListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class MedicineListActivity extends AppCompatActivity {
 
-    SearchView et_search;
-    ArrayList<Medicine> medicineList;
+    AutoCompleteTextView et_search;
+    EditText upload;
+    ArrayList medicineList;
     List searchlist;
     ListView lv_medicine;
     EmployeeAdapter customMedicineListAdapter;
     LinearLayout linearLayoutcard;
     String search;
-    ImageView img_logo,img_background;
-    CardView cardView;
+    ImageView img_logo;
     ActionBar actionBar;
-    ImageView img_search,img_home,img_cart,img_profile;
+    DatabaseHandler db;
+    ImageView img_search,img_home,img_cart,img_profile,img_profilepic;
+    SessionManager session;
     boolean doubleBackToExitPressedOnce = false;
     Toolbar toolbar;
-    Button btn_back,btn_notification,btn_login,btn_signin;
+    TextView tv_logo;
+    Button btn_back,btn_notification,btn_login,btn_signin,btn_logout;
+    ArrayAdapter<String>medicineadapter;
+    String gender;
+    Button btn_logoutno;
+    List<Uri> mSelected;
+    private String TAG="MedicineListActivity";
+    private static final int REQUEST_CODE_CHOOSE=100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicinelist);
         actionBar=getSupportActionBar();
         toolbar=(Toolbar)findViewById(R.id.toolbar);
-        btn_back=(Button)findViewById(R.id.toolbar_back);
-        btn_notification=(Button)findViewById(R.id.toolbar_notification);
-
+        db=new DatabaseHandler(MedicineListActivity.this);
+        tv_logo=(TextView)findViewById(R.id.tv_logo);
+        session=new SessionManager(MedicineListActivity.this);
+        db=new DatabaseHandler(MedicineListActivity.this);
         img_home=(ImageView)findViewById(R.id.img_homesearch);
         img_cart=(ImageView)findViewById(R.id.img_cartsearch);
         img_profile=(ImageView)findViewById(R.id.img_profilesearch);
+        img_profilepic=(ImageView)findViewById(R.id.img_profilepicmedicinelist);
         btn_login=(Button)findViewById(R.id.toolbar_login);
         btn_signin=(Button)findViewById(R.id.toolbar_signin);
+        btn_logout=(Button)findViewById(R.id.toolbar_logout);
+        btn_logoutno=(Button)findViewById(R.id.btn_logoutno);
+        upload=(EditText) findViewById(R.id.uploadprescription);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        et_search=(SearchView) findViewById(R.id.et_search);
-        linearLayoutcard=(LinearLayout)findViewById(R.id.llcard);
-        lv_medicine=(ListView)findViewById(R.id.lv_medicinelist);
-        img_logo=(ImageView)findViewById(R.id.img_logo);
-        img_background=(ImageView)findViewById(R.id.img_backgroundmedicinelist);
-        cardView=(CardView)findViewById(R.id.cardview);
+        et_search=(AutoCompleteTextView) findViewById(R.id.et_search);
+        mSelected=new ArrayList<Uri>();
+        //linearLayoutcard=(LinearLayout)findViewById(R.id.llcard);
         //ImageView closeButton = (ImageView)mSearchView.findViewById(R.id.search_close_btn);
-        medicineList=new ArrayList<Medicine>();
+        medicineList=new ArrayList();
         searchlist=new ArrayList();
+        medicineList.add("Napa");
+        medicineList.add("Napa Extra");
+        medicineList.add("Napathin");
+        medicineList.add("Napa Extend");
+        medicineList.add("Napa plus");
+        medicineList.add("Brozedex");
+        medicineList.add("Flexo");
+        //customMedicineListAdapter=new EmployeeAdapter(MedicineListActivity.this,medicineList);
 
-        btn_back.setVisibility(btn_back.GONE);
-        btn_notification.setVisibility(btn_notification.GONE);
-        lv_medicine.setVisibility(lv_medicine.GONE);
-        btn_login.setVisibility(btn_notification.VISIBLE);
-        btn_login.setTextSize(14);
-        btn_signin.setTextSize(14);
-        btn_signin.setVisibility(btn_signin.VISIBLE);
+
+        medicineadapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,medicineList);
+        et_search.setAdapter(medicineadapter);
+
+
+        et_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final CustomMedicineListDialog dialog=new CustomMedicineListDialog(MedicineListActivity.this,medicineList.get(i).toString());
+                WindowManager.LayoutParams lWindowParams = new WindowManager.LayoutParams();
+                lWindowParams.width = WindowManager.LayoutParams.WRAP_CONTENT; // this is where the magic happens
+                lWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.show();
+                // I was told to call show first I am not sure if this it to cause layout to happen so that we can override width?
+                dialog.getWindow().setAttributes(lWindowParams);
+                dialog.getWindow().setGravity(Gravity.BOTTOM);
+                dialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialogdrawable));
+                dialog.findViewById(R.id.btn_close_popup).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                       dialog.dismiss();
+                       et_search.setText("");
+                    }
+                });
+            }
+        });
+
+        btn_logoutno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                session.setLogin(false);
+                startActivity(new Intent(MedicineListActivity.this,LoginActivity.class));
+            }
+        });
+
+
+
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isStoragePermissionGranted()) {
+                    Matisse.from(MedicineListActivity.this)
+                            .choose(MimeType.ofAll())
+                            .countable(true)
+                            .maxSelectable(9)
+                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                            .thumbnailScale(0.85f)
+                            .imageEngine(new GlideEngine())
+                            .forResult(REQUEST_CODE_CHOOSE);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"You need to have storage permission",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        if (session.isLoggedIn()){
+            btn_login.setVisibility(btn_login.GONE);
+            btn_signin.setVisibility(btn_signin.GONE);
+            btn_logout.setVisibility(btn_logout.VISIBLE);
+            btn_logoutno.setVisibility(btn_logout.VISIBLE);
+            btn_logout.setBackgroundResource(R.drawable.propicmale);
+            clickpropic();
+        }  else {
+
+            btn_login.setVisibility(btn_login.VISIBLE);
+            btn_signin.setVisibility(btn_signin.VISIBLE);
+            btn_logout.setVisibility(btn_logout.GONE);
+            btn_logoutno.setVisibility(btn_logout.GONE);
+        }
+
+
+
+
         clicklogin();
 
-        cardView.setCardBackgroundColor(getResources().getColor(android.R.color.transparent));
-        cardView.setCardElevation(0);
-        cardView.setPadding(0,0,0,0);
-        setupSearchView();
 
-        medicineList.add(new Medicine("Napa Extra","Square","10$"));
-        medicineList.add(new Medicine("Paracetamol","Square","10$"));
-        medicineList.add(new Medicine("Tusca","Square","10$"));
-        medicineList.add(new Medicine("Antacid","Square","10$"));
-        medicineList.add(new Medicine("Ace","Square","10$"));
-        medicineList.add(new Medicine("Brozedex","Square","10$"));
-        medicineList.add(new Medicine("Flexo","Square","10$"));
-        customMedicineListAdapter=new EmployeeAdapter(MedicineListActivity.this,medicineList);
+
+
+
 
 
         changeiconcolour(MedicineListActivity.this,R.drawable.homepage,img_home);
@@ -100,127 +198,117 @@ public class MedicineListActivity extends AppCompatActivity implements SearchVie
         img_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MedicineListActivity.this,CartActivity.class));
+               startActivity(new Intent(MedicineListActivity.this,CustomCartDialog.class));
             }
         });
         img_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MedicineListActivity.this,MyProfileActivity.class));
+                if (session.isLoggedIn()) {
+                    startActivity(new Intent(MedicineListActivity.this, MyProfileActivity.class));
+                }
+                else {
+
+                }
             }
         });
 
-        et_search.setOnSearchClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 lv_medicine.setVisibility(lv_medicine.GONE);
-             }
-         });
 
+        et_search.addTextChangedListener(new TextWatcher() {
 
-        lv_medicine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(MedicineListActivity.this,Main2Activity.class));
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                MedicineListActivity.this.medicineadapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
 
-    }
 
-    private void setupSearchView()
-    {
-        et_search.setOnQueryTextListener(this);
-
-    }
-
-    private void setupListview()
-    {
-        lv_medicine.setAdapter(customMedicineListAdapter);
-        lv_medicine.setTextFilterEnabled(true);
 
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query)
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Log.e("val", "requestCode ->  " + requestCode+"  resultCode "+resultCode);
+        if(requestCode==REQUEST_CODE_CHOOSE&&resultCode==RESULT_OK) {
+            mSelected=Matisse.obtainResult(data);
+            startActivity(new Intent(MedicineListActivity.this,PrescriptionActivity.class).putParcelableArrayListExtra("uri", (ArrayList<? extends Parcelable>) mSelected));
+            int selected=mSelected.size();
+            //Toast.makeText(getApplicationContext(),mSelected.get(0).toString(),Toast.LENGTH_SHORT).show();
+       /*     Toast.makeText(getApplicationContext(),String.valueOf(mSelected.size()),Toast.LENGTH_SHORT).show();
+            Uri imageUri = Matisse.obtainResult(data).get(0);
+            InputStream imageStream = null;
+            String path=imageUri.getPath();
+            File file=new File(path);
+            Toast.makeText(getApplicationContext(),path,Toast.LENGTH_SHORT).show();*/
+        }
 
-    {
-        Toast.makeText(this, "searchview is clicked", Toast.LENGTH_SHORT).show();
-        return false;
+
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
 
-        btn_signin.setVisibility(btn_signin.GONE);
-        btn_login.setVisibility(btn_login.GONE);
-        btn_back.setVisibility(btn_notification.VISIBLE);
-        btn_notification.setVisibility(btn_notification.VISIBLE);
-        clickback();
-        cardView.setCardBackgroundColor(getResources().getColor(android.R.color.white));
-        cardView.setCardElevation(10);
-        cardView.setPadding(0,10,0,0);
-        img_background.setVisibility(img_background.GONE);
-        lv_medicine.setVisibility(lv_medicine.VISIBLE);
-        cardView.setVisibility(cardView.VISIBLE);
-        setupListview();
-        Filter filter = customMedicineListAdapter.getFilter();
-        if (TextUtils.isEmpty(newText)) {
-            filter.filter("");
+
+    // other 'case' lines to check for other
+    // permissions this app might request.
+
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
         } else {
-
-            filter.filter(newText);
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
         }
-        return true;
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
 
-        this.doubleBackToExitPressedOnce = true;
-        btn_back.setVisibility(btn_back.GONE);
-        btn_notification.setVisibility(btn_notification.GONE);
-        btn_signin.setVisibility(btn_signin.VISIBLE);
-        btn_login.setVisibility(btn_login.VISIBLE);
-        img_background.setVisibility(img_background.VISIBLE);
-        changeiconcolour(MedicineListActivity.this,R.drawable.homepage,img_home);
-        changeiconcolourtogrey(MedicineListActivity.this,R.drawable.cart,img_cart);
-        changeiconcolourtogrey(MedicineListActivity.this,R.drawable.profile,img_profile);
-        lv_medicine.setVisibility(lv_medicine.GONE);
-        cardView.setCardBackgroundColor(getResources().getColor(android.R.color.transparent));
-        cardView.setCardElevation(0);
-        cardView.setPadding(0,0,0,0);
-        clicklogin();
-        et_search.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                btn_back.setVisibility(btn_back.GONE);
-                btn_notification.setVisibility(btn_notification.GONE);
-                btn_signin.setVisibility(btn_signin.VISIBLE);
-                btn_login.setVisibility(btn_login.VISIBLE);
-                img_background.setVisibility(img_background.VISIBLE);
-                lv_medicine.setVisibility(lv_medicine.GONE);
-                cardView.setCardBackgroundColor(getResources().getColor(android.R.color.transparent));
-                cardView.setCardElevation(0);
-                cardView.setPadding(0,0,0,0);
-                setupSearchView();
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        });
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+        }
+    }
+
+
+
+
+
 
     /*public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -243,7 +331,7 @@ public class MedicineListActivity extends AppCompatActivity implements SearchVie
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MedicineListActivity.this,LoginActivity.class));
+                   startActivity(new Intent(MedicineListActivity.this,LoginActivity.class));
             }
         });
 
@@ -255,37 +343,112 @@ public class MedicineListActivity extends AppCompatActivity implements SearchVie
         });
     }
 
-    private  void clickback(){
-        btn_back.setOnClickListener(new View.OnClickListener() {
+    private void clickpropic(){
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn_back.setVisibility(btn_back.GONE);
-                btn_notification.setVisibility(btn_notification.GONE);
-                btn_signin.setVisibility(btn_signin.VISIBLE);
-                btn_login.setVisibility(btn_login.VISIBLE);
-                img_background.setVisibility(img_background.VISIBLE);
-                lv_medicine.setVisibility(lv_medicine.GONE);
-                cardView.setCardBackgroundColor(getResources().getColor(android.R.color.transparent));
-                cardView.setCardElevation(0);
-                cardView.setPadding(0,0,0,0);
-                setupSearchView();
+                startActivity(new Intent(MedicineListActivity.this,MyProfileActivity.class));
             }
         });
-
     }
+
+
+
 
     public static void changeiconcolour(Context context, int resId, ImageView img){
         Drawable mDrawable = ContextCompat.getDrawable(context, resId);
-        mDrawable.setColorFilter(Color.parseColor("#4DCBEC"), PorterDuff.Mode.MULTIPLY);
+        mDrawable.setColorFilter(Color.parseColor("#1abc9c"), PorterDuff.Mode.MULTIPLY);
         img.setImageDrawable(mDrawable);
     }
 
     public static void changeiconcolourtogrey(Context context, int resId, ImageView img){
         Drawable mDrawable = ContextCompat.getDrawable(context, resId);
-        mDrawable.setColorFilter(Color.parseColor("#D3D8E0"), PorterDuff.Mode.MULTIPLY);
+        mDrawable.setColorFilter(Color.parseColor("#7f8c8d"), PorterDuff.Mode.MULTIPLY);
         img.setImageDrawable(mDrawable);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (session.isLoggedIn()){
+            btn_login.setVisibility(btn_login.GONE);
+            btn_signin.setVisibility(btn_signin.GONE);
+            btn_logout.setVisibility(btn_logout.VISIBLE);
+            btn_logoutno.setVisibility(btn_logout.VISIBLE);
+            btn_logout.setBackgroundResource(R.drawable.propicmale);
+            clickpropic();
 
+        }  else {
 
+            btn_login.setVisibility(btn_login.VISIBLE);
+            btn_signin.setVisibility(btn_signin.VISIBLE);
+            btn_logout.setVisibility(btn_logout.GONE);
+            btn_logoutno.setVisibility(btn_logout.GONE);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (session.isLoggedIn()){
+            btn_login.setVisibility(btn_login.GONE);
+            btn_signin.setVisibility(btn_signin.GONE);
+            btn_logout.setVisibility(btn_logout.VISIBLE);
+            btn_logoutno.setVisibility(btn_logout.VISIBLE);
+            btn_logout.setBackgroundResource(R.drawable.propicmale);
+            clickpropic();
+        }  else {
+
+            btn_login.setVisibility(btn_login.VISIBLE);
+            btn_signin.setVisibility(btn_signin.VISIBLE);
+            btn_logout.setVisibility(btn_logout.GONE);
+            btn_logoutno.setVisibility(btn_logout.GONE);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (session.isLoggedIn()){
+            btn_login.setVisibility(btn_login.GONE);
+            btn_signin.setVisibility(btn_signin.GONE);
+            btn_logout.setVisibility(btn_logout.VISIBLE);
+            btn_logoutno.setVisibility(btn_logout.VISIBLE);
+            btn_logout.setBackgroundResource(R.drawable.propicmale);
+            clickpropic();
+        }  else {
+
+            btn_login.setVisibility(btn_login.VISIBLE);
+            btn_signin.setVisibility(btn_signin.VISIBLE);
+            btn_logout.setVisibility(btn_logout.GONE);
+            btn_logoutno.setVisibility(btn_logout.GONE);
+            clickpropic();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (session.isLoggedIn()){
+            btn_login.setVisibility(btn_login.GONE);
+            btn_signin.setVisibility(btn_signin.GONE);
+            btn_logout.setVisibility(btn_logout.VISIBLE);
+            btn_logoutno.setVisibility(btn_logout.VISIBLE);
+            btn_logout.setBackgroundResource(R.drawable.propicmale);
+            clickpropic();
+        }  else {
+
+            btn_login.setVisibility(btn_login.VISIBLE);
+            btn_signin.setVisibility(btn_signin.VISIBLE);
+            btn_logout.setVisibility(btn_logout.GONE);
+            btn_logoutno.setVisibility(btn_logout.GONE);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        session.setLogin(false);
+    }
 }

@@ -5,14 +5,24 @@ package com.appersden.epharma;
  */
 
 public class Medicine {
+    private int image;
     private String name;
     private String company;
     private String price;
 
-    public Medicine(String name, String company, String price) {
+    public Medicine(int image, String name, String company, String price) {
+        this.image = image;
         this.name = name;
         this.company = company;
         this.price = price;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public String getName() {

@@ -4,211 +4,239 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/border_squer"
     android:orientation="vertical"
-    android:background="#F5FBFE"
     tools:context="com.appersden.epharma.MedicineListActivity">
 
+    <!--android:background="#F6FBFD"-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/img_backgroundmedicinelist"
-            android:alpha="0.4"
-            android:scaleType="fitXY"
-            android:src="@drawable/background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0.0px"
-        app:cardElevation="10dp"
-        android:paddingTop="10dp"
-        app:cardPreventCornerOverlap="false">
-
-     <LinearLayout
-         android:id="@+id/llcard"
-         android:orientation="vertical"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
 
         <RelativeLayout
-            android:layout_gravity="start"
-            android:layout_marginRight="7dp"
-            android:layout_width="60dp"
-            android:layout_height="20dp">
-            <Button
-                android:id="@+id/toolbar_back"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="start"
-                android:adjustViewBounds="true"
-                android:background="@drawable/back"/>
-            <Button
-                android:textStyle="bold"
-                android:textSize="10sp"
-                android:background="@null"
-                android:textColor="@color/text"
-                android:id="@+id/toolbar_login"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:adjustViewBounds="true"
-                android:text="Login"/>
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:gravity="end"
-            android:layout_gravity="right"
-            android:layout_marginRight="7dp"
-            android:layout_width="60dp"
-            android:layout_height="20dp">
-            <Button
-                android:textStyle="bold"
-                android:textSize="10sp"
-                android:background="@null"
-                android:textColor="@color/text"
-                android:id="@+id/toolbar_signin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:text="Sign up"/>
-
-            <Button
-                android:id="@+id/toolbar_notification"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/notication"/>
-
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>
-
-         <ImageView
-             android:id="@+id/img_logo"
-             android:layout_marginBottom="20dp"
-             android:layout_gravity="center"
-             android:src="@drawable/epharmalogo"
-             android:layout_width="250dp"
-             android:layout_height="50dp" />
-
-    <LinearLayout
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-    <FrameLayout
-        android:background="@drawable/capsule_button_shape"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp">
-
-
-        <ImageView
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="90dp"
-            android:layout_gravity="center"
-            android:src="@drawable/epharmalogo"
-            android:layout_width="250dp"
-            android:layout_height="80dp" />
-
-        <SearchView
-
-            android:iconifiedByDefault="false"
-            android:clickable="true"
-            android:background="@null"
-            android:id="@+id/et_search"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:queryHint="Try searching for medicine"
-            android:closeIcon="@drawable/close"
-            android:layout_gravity="center"
-            android:singleLine="true" />
-
-
-    </FrameLayout>
-
-    </LinearLayout>
-     </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:layout_below="@+id/cardview"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ListView
-            android:divider="@null"
-            android:id="@+id/lv_medicinelist"
+            android:id="@+id/lllist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </ListView>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginLeft="7dp">
 
 
 
-    </RelativeLayout>
+                        <Button
+                            android:id="@+id/toolbar_login"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/loginkey"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
 
-    <LinearLayout
-        android:weightSum="15"
-        android:layout_alignParentBottom="true"
-        android:background="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
+                        <Button
+                            android:id="@+id/toolbar_logout"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignStart="@+id/toolbar_login"
+                            android:layout_alignLeft="@+id/toolbar_login"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginLeft="0dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/propicmale"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="7dp"
+                        android:gravity="end">
+
+                        <Button
+                            android:id="@+id/toolbar_signin"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/signupkey"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+
+                        <Button
+                            android:id="@+id/btn_logoutno"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/logout"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.Toolbar>
+
+                <TextView
+                    android:id="@+id/tv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:text="ePharma"
+                    android:textColor="@android:color/black"
+                    android:textSize="35sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:id="@+id/rldropdown"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/border_squer">
+
+
+                        <AutoCompleteTextView
+                            android:paddingLeft="10dp"
+                            android:textStyle="normal"
+                            android:drawablePadding="5dp"
+                            android:textColorHint="@color/black"
+                            android:textSize="15sp"
+                            android:hint="Search medicine / symptom / disease"
+                            android:drawableLeft="@drawable/searchbuttonlayer"
+                            android:background="@null"
+                            android:id="@+id/et_search"
+                            android:dropDownAnchor="@id/rldropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                           />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/llcard"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:background="@drawable/border_squer"
+                >
+
+                <EditText
+                    android:id="@+id/uploadprescription"
+                    android:clickable="true"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/black"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:textStyle="normal"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/uploadbuttonlayer"
+                    android:text="Upload prescription / medicine image"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:paddingBottom="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lllist"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            >
+
+
+        </LinearLayout>
+
 
         <ImageView
-            android:layout_weight="5"
-            android:id="@+id/img_homesearch"
-            android:layout_gravity="center"
-            android:src="@drawable/homepage"
-            android:layout_width="25dp"
-            android:layout_height="25dp" />
+            android:id="@+id/img_profilepicmedicinelist"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="18dp" />
 
-        <ImageView
-            android:layout_weight="5"
-            android:id="@+id/img_cartsearch"
-            android:layout_gravity="center"
-            android:src="@drawable/cart"
-            android:layout_width="25dp"
-            android:layout_height="25dp" />
+        <LinearLayout
+            android:background="@drawable/border_squer"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:weightSum="15">
 
-        <ImageView
-            android:layout_weight="5"
-            android:id="@+id/img_profilesearch"
-            android:layout_gravity="center"
-            android:src="@drawable/profile"
-            android:layout_width="25dp"
-            android:layout_height="25dp" />
-    </LinearLayout>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_weight="5"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp">
+            <ImageView
+                android:id="@+id/img_cartsearch"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/cart" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_homesearch"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:src="@drawable/homepage" />
+
+            <ImageView
+                android:id="@+id/img_profilesearch"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:src="@drawable/profile" />
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

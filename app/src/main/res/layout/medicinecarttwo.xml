@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:paddingBottom="30dp"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Enter Your details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+
+                    <!--  Name Label -->
+                    <LinearLayout
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/border_squer">
+
+                        <EditText
+                            android:id="@+id/et_nameorderdetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:hint="your name"
+                            android:paddingLeft="10dp"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/border_squer">
+
+                        <EditText
+                            android:id="@+id/et_et_contactorderdetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:background="@null"
+                            android:drawablePadding="5dp"
+                            android:hint="contact number"
+                            android:paddingLeft="10dp"
+                            android:inputType="phone"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:paddingTop="10dp"
+                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/border_squer">
+
+                        <EditText
+                            android:id="@+id/et_addressorderdetails"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:background="@null"
+                            android:hint="address"
+                            android:paddingLeft="10dp"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+
+
+
+                        <Button
+                            android:id="@+id/btn_ordernowcarttwo"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_gravity="end"
+                            android:textAllCaps="false"
+                            android:background="@drawable/capsulebuttonblack"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:text="Order now"
+                            android:textColor="@color/black"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp" />
+
+                    >
+                    <!-- Email Label -->
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not a member yet?"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text"
+                    android:textSize="16dip"
+                    />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/link_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign up"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textColorHint="@color/text"
+                    android:textSize="16dip"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@drawable/border_squer"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:weightSum="15">
+
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_weight="5"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+            <ImageView
+                android:id="@+id/img_orderhistorylink"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/cart" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_homesearch"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:src="@drawable/homepage" />
+
+        <ImageView
+            android:id="@+id/img_profilesearch"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:src="@drawable/profile" />
+    </LinearLayout>
+</RelativeLayout>

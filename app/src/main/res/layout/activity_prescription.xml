@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrescriptionActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarprescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            >
+
+
+
+            <Button
+                android:id="@+id/toolbar_loginpres"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/loginkey"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <!--<Button
+                android:id="@+id/toolbar_logoutpres"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignStart="@+id/toolbar_login"
+                android:layout_alignLeft="@+id/toolbar_login"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:adjustViewBounds="true"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold" />-->
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="7dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/toolbar_signinpres"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/signupkey"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+
+          <!--  <Button
+                android:id="@+id/btn_logoutnopres"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:adjustViewBounds="true"
+                android:textColor="@color/white"
+                android:textSize="10sp" />-->
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+    <ListView
+
+        android:paddingBottom="40dp"
+        android:id="@+id/listviewprescription"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp">
+
+
+    </ListView>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:text="Next"
+            android:background="@drawable/capsulebuttonblack"
+            android:layout_gravity="end"
+            android:layout_width="100dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/border_squer"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:weightSum="15">
+
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_weight="5"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+            <ImageView
+                android:id="@+id/img_cartsearch"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/cart" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_homesearch"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:src="@drawable/homepage" />
+
+        <ImageView
+            android:id="@+id/img_profilesearch"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:src="@drawable/profile" />
+    </LinearLayout>
+</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
