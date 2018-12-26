@@ -7,22 +7,20 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-    @POST("login")
+    @POST("authentication")
     @FormUrlEncoded
-    Call<RegisterResponse> checkuser(@Field("username") String username,
+    Call<RegisterResponse> checkuser(@Field("username") String email,
                                      @Field("password") String password);
 
-    @POST("signup")
+    @POST("register")
     @FormUrlEncoded
-    Call<RegisterResponse> userRegistration(@Field("firstname") String firstname,
-                                    @Field("lastname") String lastname,
-                                    @Field("email") String email,
-                                    @Field("password") String password,
-                                    @Field("confpassword") String confpassword,
-                                    @Field("website") String website,
-                                    @Field("company") String company,
+    Call<RegisterResponse> userRegistration(@Field("name") String firstname,
+                                    @Field("username") String username,
                                     @Field("phone") String phone,
-                                    @Field("address") String address,
-                                    @Field("type") int type);
+                                    @Field("email") String email,
+                                    @Field("gender") String gender,
+                                    @Field("password") String password,
+                                    @Field("image") String image);
+
 
 }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,10 +19,12 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +35,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -79,7 +89,19 @@ public class DetailsFragment extends Fragment {
     private int RESULT_LOAD_IMG = 1;
     SessionManager session;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    String username="",phone="",email="";
     String gendertexts="";
+
+    public String getEncoded() {
+        return encoded;
+    }
+
+    public void setEncoded(String encoded) {
+        this.encoded = encoded;
+    }
+
+    String encoded;
+    ProgressDialog dialog;
 
     @Nullable
     @Override
@@ -99,32 +121,16 @@ public class DetailsFragment extends Fragment {
         gender = (Spinner)rootView.findViewById(R.id.spinnergendermyprofile);
         img_editphoto=(ImageView)rootView.findViewById(R.id.img_editprofilemypro);
         img_editchangepass=(ImageView)rootView.findViewById(R.id.img_editchangepassmyprofile);
+        dialog=new ProgressDialog(getActivity());
         db = new DatabaseHandler(getActivity());
 
-        List<String> flower = new ArrayList<>();
-        flower.add("Male");
-        flower.add("Female");
-        flower.add("Others");
 
-        // Initialize an array adapter
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,flower) {
-            public View getView(int position, View convertView, ViewGroup parent) {
-                // Cast the spinner collapsed item (non-popup item) as a text view
-                TextView tv = (TextView) super.getView(position, convertView, parent);
-
-                // Set the text color of spinner item
-                tv.setTextColor(Color.BLACK);
-
-                // Return the view
-                return tv;
-            }
-        };
-
-        gender.setAdapter(mAdapter);
-
-
-
-
+         img_profilepic.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+               selectImage();
+             }
+         });
 
         img_editusername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,24 +139,85 @@ public class DetailsFragment extends Fragment {
             }
         });
 
+            final List<String> flower = new ArrayList<>();
+            flower.add("Male");
+            flower.add("Female");
+            flower.add("Others");
+
+            // Initialize an array adapter
+            final ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, flower) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    // Cast the spinner collapsed item (non-popup item) as a text view
+                    TextView tv = (TextView) super.getView(position, convertView, parent);
+
+                    // Set the text color of spinner item
+                    tv.setTextColor(Color.BLACK);
+
+                    // Return the view
+                    return tv;
+                }
+            };
+
+            gender.setAdapter(mAdapter);
 
 
-        if (session.isLoggedIn()) {
-            Map map = new HashMap();
-            map = db.getUserDetails();
-            String username = map.get("username").toString();
-            String email = map.get("email").toString();
-            String phone = map.get("phone").toString();
-            gendertexts = map.get("gender").toString();
-            et_username.setText(username);
-            et_email.setText(email);
-            et_phone.setText(phone);
-            if (gendertexts.equals("Female")) {
-                img_profilepic.setImageDrawable(getResources().getDrawable(R.drawable.propicfemale));
+
+
+        dialog.setMessage("Please wait...");
+        showDialog();
+        String tag_string_req="Sign in";
+        String token=SignUpActivity.getDefaults("token",getActivity());
+        String url="http://173.82.105.191:7000/customer/current/"+token;
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                hideDialog();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    String id=jsonObject.getString("_id");
+                    SignUpActivity.setDefaults("id",id,getActivity());
+                    username=jsonObject.getString("username");
+                    phone=jsonObject.getString("phone");
+                    email=jsonObject.getString("email");
+                    String genders=jsonObject.getString("gender");
+                    String image=jsonObject.getString("image");
+                    if (genders.equals("Male")){
+                     gender.setSelection(0);
+                    }
+                    else if (genders.equals("Female")){
+                        gender.setSelection(1);
+                    }
+                    else {
+                        gender.setSelection(2);
+                    }
+                    et_username.setText(username);
+                    et_email.setText(email);
+                    et_phone.setText(phone);
+
+                    if (image.equals("")){
+                        img_profilepic.setImageDrawable(getResources().getDrawable(R.drawable.propicmale));
+                    }
+                    else {
+                        byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        img_profilepic.setImageBitmap(decodedByte);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-            else {
-                img_profilepic.setImageDrawable(getResources().getDrawable(R.drawable.propicmale));
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideDialog();
+                Toast.makeText(getActivity(),"Data fetch failed!!Check your internet connection",Toast.LENGTH_SHORT).show();
             }
+        });
+        Log.v("_______", "+++++++" + stringRequest);
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+
 
 
             img_editusername.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +225,7 @@ public class DetailsFragment extends Fragment {
                 public void onClick(View view) {
                     et_email.setEnabled(true);
                     et_email.setClickable(true);
+                    changephone("email",et_email.getText().toString());
                 }
             });
 
@@ -168,6 +236,7 @@ public class DetailsFragment extends Fragment {
                 public void onClick(View view) {
                     et_phone.setEnabled(true);
                     et_phone.setClickable(true);
+                    changephone("phone",et_phone.getText().toString());
                 }
             });
 
@@ -176,6 +245,7 @@ public class DetailsFragment extends Fragment {
                 public void onClick(View view) {
                     gender.setEnabled(true);
                     gender.setClickable(true);
+                    changephone("gender",gender.getSelectedItem().toString());
                 }
             });
 
@@ -183,18 +253,25 @@ public class DetailsFragment extends Fragment {
             img_editphoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    selectImage();
+                    Log.d("image","imagestring"+getEncoded());
+                    changephone("image",getEncoded());
                 }
             });
 
             img_editchangepass.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    et_retypepassword.setEnabled(true);
-                    et_retypepassword.setClickable(true);
+                    if (et_newpassword.getText().toString().equals(et_retypepassword.getText().toString())) {
+                        changepass(et_oldpassword.getText().toString(), et_newpassword.getText().toString());
+                    }
+
+                    else {
+
+                        Toast.makeText(getActivity(),"Password don't match",Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-        }
+
 
         return rootView;
     }
@@ -214,18 +291,20 @@ public class DetailsFragment extends Fragment {
                 convertimage.compress(Bitmap.CompressFormat.PNG, 50, stream);
                 byteArray = stream.toByteArray();
                 img_profilepic.setImageBitmap(convertimage);
-
+                byte[] byteArray = stream .toByteArray();
+                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                setEncoded(encoded);
             }
 
-        } else if (requestCode == 2) {
+        } else if (requestCode == 1) {
 
 
 
-            imageUri = data.getData();
-            path=imageUri.getPath();
+            Uri imagesUri = data.getData();
+            String path=imagesUri.getPath();
             InputStream imageStream = null;
             try {
-                imageStream = getActivity().getContentResolver().openInputStream(imageUri);
+                imageStream = getActivity().getContentResolver().openInputStream(imagesUri);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -233,9 +312,9 @@ public class DetailsFragment extends Fragment {
             Bitmap convertimage=getResizedBitmap(selectedImage,600);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             convertimage.compress(Bitmap.CompressFormat.PNG, 50, stream);
-            byteArray = stream.toByteArray();
+           byte[] byteArray = stream.toByteArray();
             img_profilepic.setImageBitmap(convertimage);
-            //*Log.w("path of image from gallery......******************.........", picturePath+"");*//*
+              Log.d("imagepath","pathssss"+path);
 
         }
 
@@ -372,4 +451,106 @@ public class DetailsFragment extends Fragment {
 
 
     }
+
+
+    public String getGendertexts() {
+        return gendertexts;
+    }
+
+    public void setGendertexts(String gendertexts) {
+        this.gendertexts = gendertexts;
+    }
+
+    private void showDialog() {
+        if (!dialog.isShowing())
+            dialog.show();
+    }
+
+    private void hideDialog() {
+        if (dialog.isShowing())
+            dialog.dismiss();
+    }
+
+    private void changepass(final String oldpass, final String newpass){
+        dialog.setMessage("Updating..");
+        showDialog();
+        String tag_string_req="Sign in";
+        String id=SignUpActivity.getDefaults("id",getActivity());
+        String url="http://173.82.105.191:7000/customer/changepassword/"+id;
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                hideDialog();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    Toast.makeText(getActivity(),jsonObject.getString("msg"),Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideDialog();
+                Toast.makeText(getActivity(),"Check your internet connection",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to main_page url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("oldPassword", oldpass);
+                params.put("newPassword", newpass);
+                return params;
+
+            }
+
+        };
+        Log.v("_______", "+++++++" + stringRequest);
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+    }
+
+    private void changephone(final String input, final String oldphone){
+        dialog.setMessage("Updating..");
+        showDialog();
+        String tag_string_req="Sign in";
+        String id=SignUpActivity.getDefaults("id",getActivity());
+        String url="http://173.82.105.191:7000/customer/update/"+id;
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                hideDialog();
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    Toast.makeText(getActivity(),jsonObject.getString("msg"),Toast.LENGTH_SHORT).show();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideDialog();
+                Toast.makeText(getActivity(),"Update failed",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to main_page url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put(input, oldphone);
+                return params;
+
+            }
+
+        };
+        Log.v("_______", "+++++++" + stringRequest);
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
+    }
+
+
 }

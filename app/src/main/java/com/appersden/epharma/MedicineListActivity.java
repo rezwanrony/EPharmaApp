@@ -1,7 +1,9 @@
 package com.appersden.epharma;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -94,6 +98,7 @@ public class MedicineListActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         et_search=(AutoCompleteTextView) findViewById(R.id.et_search);
         mSelected=new ArrayList<Uri>();
+        networkcheck();
         //linearLayoutcard=(LinearLayout)findViewById(R.id.llcard);
         //ImageView closeButton = (ImageView)mSearchView.findViewById(R.id.search_close_btn);
         medicineList=new ArrayList();
@@ -371,6 +376,7 @@ public class MedicineListActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        networkcheck();
         if (session.isLoggedIn()){
             btn_login.setVisibility(btn_login.GONE);
             btn_signin.setVisibility(btn_signin.GONE);
@@ -391,6 +397,7 @@ public class MedicineListActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        networkcheck();
         if (session.isLoggedIn()){
             btn_login.setVisibility(btn_login.GONE);
             btn_signin.setVisibility(btn_signin.GONE);
@@ -410,6 +417,7 @@ public class MedicineListActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        networkcheck();
         if (session.isLoggedIn()){
             btn_login.setVisibility(btn_login.GONE);
             btn_signin.setVisibility(btn_signin.GONE);
@@ -430,6 +438,7 @@ public class MedicineListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        networkcheck();
         if (session.isLoggedIn()){
             btn_login.setVisibility(btn_login.GONE);
             btn_signin.setVisibility(btn_signin.GONE);
@@ -449,6 +458,39 @@ public class MedicineListActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        session.setLogin(false);
+
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    private void networkcheck(){
+        if (isNetworkAvailable()){
+
+        }
+        else {
+
+            try {
+                AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
+
+                alertDialog.setTitle("Info");
+                alertDialog.setMessage("Internet not available, Cross check your internet connectivity and try again");
+                alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+
+                    }
+                });
+
+                alertDialog.show();
+            } catch (Exception e) {
+                Log.d("Dialog", "Show Dialog: " + e.getMessage());
+            }
+        }
+
     }
 }

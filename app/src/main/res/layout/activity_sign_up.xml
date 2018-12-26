@@ -58,6 +58,31 @@
                 android:layout_marginBottom="5dp"
                >
                 <EditText
+                    android:id="@+id/et_namesignup"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="@color/black"
+                    android:textStyle="normal"
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="5dp"
+                    android:background="@null"
+                    android:hint="Full Name"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_squer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                >
+                <EditText
                     android:id="@+id/et_usernamesignup"
                     android:paddingLeft="10dp"
                     android:textColorHint="@color/black"
@@ -73,7 +98,6 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_marginTop="5dp"
                 android:background="@drawable/border_squer"
