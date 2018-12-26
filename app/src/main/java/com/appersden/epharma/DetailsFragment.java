@@ -286,39 +286,47 @@ public class DetailsFragment extends Fragment {
             if (requestCode == 1888) {
 
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
-                Bitmap convertimage=getResizedBitmap(photo,600);
+                Bitmap convertimage = getResizedBitmap(photo, 600);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 convertimage.compress(Bitmap.CompressFormat.PNG, 50, stream);
                 byteArray = stream.toByteArray();
                 img_profilepic.setImageBitmap(convertimage);
-                byte[] byteArray = stream .toByteArray();
+                byte[] byteArray = stream.toByteArray();
                 String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                 setEncoded(encoded);
             }
-
-        } else if (requestCode == 1) {
-
-
-
-            Uri imagesUri = data.getData();
-            String path=imagesUri.getPath();
-            InputStream imageStream = null;
-            try {
-                imageStream = getActivity().getContentResolver().openInputStream(imagesUri);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             }
-            final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-            Bitmap convertimage=getResizedBitmap(selectedImage,600);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            convertimage.compress(Bitmap.CompressFormat.PNG, 50, stream);
-           byte[] byteArray = stream.toByteArray();
-            img_profilepic.setImageBitmap(convertimage);
-              Log.d("imagepath","pathssss"+path);
+
+            if (resultCode==RESULT_OK) {
+
+                if (requestCode == 1) {
+
+
+                    Uri imagesUri = data.getData();
+                    String path = imagesUri.getPath();
+                    InputStream imageStream = null;
+                    try {
+                        imageStream = getActivity().getContentResolver().openInputStream(imagesUri);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    Bitmap convertimage = getResizedBitmap(selectedImage, 600);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    convertimage.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    img_profilepic.setImageBitmap(convertimage);
+                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    setEncoded(encoded);
+                    Log.d("imagepath", "pathssss" + path);
+
+                }
+
+            }
 
         }
 
-    }
+
 
 
 
@@ -374,7 +382,7 @@ public class DetailsFragment extends Fragment {
 
                     Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                    startActivityForResult(intent, 2);
+                    startActivityForResult(intent, 1);
 
 
 
